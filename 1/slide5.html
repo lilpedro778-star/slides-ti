@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Carreira e Oportunidades</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;family=Roboto+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050510;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background-color: #0f172a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Background & Texture */
+        .bg-tech {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://page.gensparksite.com/slides_images/09e4db47ca9af0c448db919c50263073.webp");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        /* Grid Layout - Adjusted for better fit */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 1.5rem; /* Reduced gap */
+            padding: 0 4rem 2rem 4rem; /* Reduced bottom padding */
+            height: 100%;
+            z-index: 10;
+            flex: 1; /* Take remaining space */
+        }
+
+        /* Card Styling - Compact version */
+        .opp-card {
+            background-color: rgba(30, 41, 59, 0.85); /* Solid color fallback */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px; /* Slightly smaller radius */
+            padding: 1.25rem 1.5rem; /* Reduced padding */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Align to top */
+            overflow: hidden;
+        }
+
+        .opp-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #fff; /* Solid color fallback */
+            opacity: 0.8;
+        }
+
+        /* Card Variants - Using solid colors instead of gradients/shadows for better export */
+        .card-demand { border-left-color: #00f3ff; }
+        .card-demand::before { background-color: #00f3ff; }
+        
+        .card-salary { border-left-color: #bd00ff; }
+        .card-salary::before { background-color: #bd00ff; }
+        
+        .card-remote { border-left-color: #f472b6; }
+        .card-remote::before { background-color: #f472b6; }
+        
+        .card-learning { border-left-color: #10b981; }
+        .card-learning::before { background-color: #10b981; }
+
+        /* Typography */
+        .code-font {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Icon Container - Scaled down */
+        .icon-circle {
+            width: 48px; /* Smaller icon container */
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            background-color: rgba(255, 255, 255, 0.05); /* Solid color fallback */
+        }
+
+        /* Decoration */
+        .bg-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            /* Replaced gradient with solid color and opacity for export compatibility */
+            background-color: #00f3ff;
+            opacity: 0.05;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .stat-tag {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.65rem; /* Smaller font */
+            padding: 2px 6px;
+            border-radius: 4px;
+            background-color: rgba(0,0,0,0.3); /* Solid color fallback */
+            display: inline-block;
+            margin-top: auto; /* Push to bottom */
+            width: fit-content;
+        }
+
+        /* Header Adjustment */
+        .header-section {
+            padding: 2rem 4rem 1rem 4rem; /* Adjusted padding */
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 1.5rem;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-tech"></div>
+<div class="bg-glow"></div>
+<!-- Header -->
+<div class="header-section relative z-20">
+<div>
+<p class="code-font text-purple-400 text-xs font-bold tracking-widest uppercase mb-1">&lt;CareerPath /&gt;</p>
+<h1 class="text-4xl font-black text-white tracking-tight">POSSIBILIDADES <span style="color: #00f3ff;">INFINITAS</span></h1>
+</div>
+<div class="text-right">
+<p class="text-gray-400 text-xs code-font"><i class="fas fa-chart-line mr-2"></i>Trend: Rising</p>
+<p class="text-gray-400 text-xs code-font"><i class="fas fa-briefcase mr-2"></i>Status: Hired</p>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="grid-container">
+<!-- Card 1: Demanda Global -->
+<div class="opp-card card-demand">
+<div class="flex justify-between items-start w-full">
+<div class="icon-circle" style="color: #00f3ff; background-color: rgba(0, 243, 255, 0.1);">
+<i class="fas fa-globe"></i>
+</div>
+<i class="fas fa-arrow-up text-cyan-400 opacity-50 text-lg transform rotate-45"></i>
+</div>
+<h3 class="text-xl font-bold text-white mb-1">Demanda Global</h3>
+<p class="text-gray-300 text-xs leading-relaxed mb-3">
+                    O mundo roda em software. Profissionais de dados, desenvolvimento, segurança e produto são disputados globalmente por startups e gigantes.
+                </p>
+<div class="stat-tag text-cyan-300 border border-cyan-500/30">
+                    vacancy_rate: high
+                </div>
+</div>
+<!-- Card 2: Valorização (Salários) -->
+<div class="opp-card card-salary">
+<div class="flex justify-between items-start w-full">
+<div class="icon-circle" style="color: #bd00ff; background-color: rgba(189, 0, 255, 0.1);">
+<i class="fas fa-gem"></i>
+</div>
+<i class="fas fa-check text-purple-400 opacity-50 text-lg"></i>
+</div>
+<h3 class="text-xl font-bold text-white mb-1">Valorização &amp; Retorno</h3>
+<p class="text-gray-300 text-xs leading-relaxed mb-3">
+                    Remuneração competitiva e crescimento acelerado baseado em mérito e impacto real nos projetos, não apenas em tempo de casa.
+                </p>
+<div class="stat-tag text-purple-300 border border-purple-500/30">
+                    growth_factor: exponential
+                </div>
+</div>
+<!-- Card 3: Flexibilidade (Remoto) -->
+<div class="opp-card card-remote">
+<div class="flex justify-between items-start w-full">
+<div class="icon-circle" style="color: #f472b6; background-color: rgba(244, 114, 182, 0.1);">
+<i class="fas fa-laptop-house"></i>
+</div>
+<i class="fas fa-wifi text-pink-400 opacity-50 text-lg"></i>
+</div>
+<h3 class="text-xl font-bold text-white mb-1">Liberdade Geográfica</h3>
+<p class="text-gray-300 text-xs leading-relaxed mb-3">
+                    Trabalho remoto permite colaborar com times distribuídos pelo mundo, oferecendo equilíbrio entre vida pessoal e carreira internacional.
+                </p>
+<div class="stat-tag text-pink-300 border border-pink-500/30">
+                    location: any
+                </div>
+</div>
+<!-- Card 4: Aprendizado Contínuo -->
+<div class="opp-card card-learning">
+<div class="flex justify-between items-start w-full">
+<div class="icon-circle" style="color: #10b981; background-color: rgba(16, 185, 129, 0.1);">
+<i class="fas fa-users-cog"></i>
+</div>
+<i class="fas fa-book-reader text-emerald-400 opacity-50 text-lg"></i>
+</div>
+<h3 class="text-xl font-bold text-white mb-1">Comunidade &amp; Evolução</h3>
+<p class="text-gray-300 text-xs leading-relaxed mb-3">
+                    Uma cultura única de compartilhamento (Open Source), onde o aprendizado nunca para e a colaboração impulsiona a inovação.
+                </p>
+<div class="stat-tag text-emerald-300 border border-emerald-500/30">
+                    learning: continuous
+                </div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-4 right-16 flex items-center gap-4 z-20">
+<div class="text-right opacity-60">
+<p class="code-font text-xs text-gray-400">git commit -m "Future Ready"</p>
+</div>
+<p class="text-gray-500 code-font text-xs font-bold">05 / 05</p>
+</div>
+<!-- Decoration Lines -->
+<div class="absolute top-1/2 right-0 w-24 h-1 bg-cyan-500 opacity-30"></div>
+<div class="absolute bottom-20 left-0 w-32 h-1 bg-purple-500 opacity-30"></div>
+</div>
+</body>
+</html>

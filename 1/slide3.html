@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inovação Constante</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;family=Roboto+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050510;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background-color: #0f172a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Background & Texture */
+        .bg-tech {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://page.gensparksite.com/slides_images/09e4db47ca9af0c448db919c50263073.webp");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            padding: 3rem 4rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-section {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        /* Timeline Container */
+        .timeline-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            padding: 0 40px;
+        }
+
+        /* The central line */
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 60px;
+            width: 0; /* Start at 0 for animation */
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%);
+            z-index: 1;
+            animation: drawLine 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        /* Timeline Item Structure */
+        .timeline-item {
+            position: relative;
+            z-index: 2;
+            width: 240px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* The Dot on the line */
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #0f172a;
+            border: 4px solid;
+            margin: 25px 0;
+            opacity: 0; /* Hidden initially */
+            transform: scale(0);
+        }
+
+        /* Card Style */
+        .tech-card {
+            background-color: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.25rem;
+            width: 100%;
+            backdrop-filter: blur(8px);
+            position: relative;
+            opacity: 0; /* Hidden initially */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(30, 41, 59, 0.95);
+        }
+
+        /* Connectors between card and dot */
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 0; /* Animate height */
+            background-color: rgba(255,255,255,0.3);
+            left: 50%;
+            transform: translateX(-50%);
+            transition: height 0.5s ease;
+        }
+
+        .tech-card.top::before {
+            bottom: -25px;
+        }
+        
+        .tech-card.bottom::before {
+            top: -25px;
+        }
+        
+        /* Reveal connector after card appears */
+        .timeline-item:hover .tech-card::before {
+            box-shadow: 0 0 8px currentColor;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+        }
+
+        .code-font {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Colors for different eras */
+        .theme-2010 { color: #38bdf8; border-color: #38bdf8; } /* Cyan */
+        .theme-2020 { color: #a855f7; border-color: #a855f7; } /* Purple */
+        .theme-now  { color: #f472b6; border-color: #f472b6; } /* Pink */
+        .theme-always { color: #34d399; border-color: #34d399; } /* Emerald */
+
+        .glow-text {
+            text-shadow: 0 0 15px rgba(189, 0, 255, 0.6);
+            animation: textPulse 3s infinite alternate;
+        }
+        
+        .particle {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .year-label {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            font-size: 1.25rem;
+            position: absolute;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        /* --- Animations --- */
+
+        @keyframes drawLine {
+            from { width: 0; }
+            to { width: calc(100% - 120px); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInTop {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInBottom {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes growHeight {
+            from { height: 0; }
+            to { height: 25px; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        @keyframes iconSpin {
+            0% { transform: rotate(0deg); }
+            20% { transform: rotate(-10deg); }
+            40% { transform: rotate(10deg); }
+            60% { transform: rotate(-5deg); }
+            80% { transform: rotate(5deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes borderShine {
+            0% { box-shadow: 0 0 5px currentColor; }
+            50% { box-shadow: 0 0 20px currentColor; }
+            100% { box-shadow: 0 0 5px currentColor; }
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translate(0, 0); opacity: 0.1; }
+            25% { transform: translate(10px, -15px); opacity: 0.3; }
+            50% { transform: translate(-5px, -25px); opacity: 0.1; }
+            75% { transform: translate(-15px, -10px); opacity: 0.2; }
+            100% { transform: translate(0, 0); opacity: 0.1; }
+        }
+
+        @keyframes textPulse {
+            from { text-shadow: 0 0 10px rgba(189, 0, 255, 0.4); }
+            to { text-shadow: 0 0 20px rgba(189, 0, 255, 0.8), 0 0 30px rgba(189, 0, 255, 0.6); }
+        }
+
+        /* Staggered Delays */
+        .delay-0 { animation-delay: 0.2s; }
+        .delay-1 { animation-delay: 0.8s; }
+        .delay-2 { animation-delay: 1.4s; }
+        .delay-3 { animation-delay: 2.0s; }
+
+        .timeline-item:nth-child(2) .tech-card { animation: slideInTop 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.3s; }
+        .timeline-item:nth-child(2) .timeline-dot { animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.3s, pulseGlow 2s infinite 1s; }
+        .timeline-item:nth-child(2) .tech-card::before { animation: growHeight 0.5s ease forwards 0.8s; height: 0; }
+        .timeline-item:nth-child(2) .year-label { animation-delay: 0.8s; }
+
+        .timeline-item:nth-child(3) .tech-card { animation: slideInBottom 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.9s; }
+        .timeline-item:nth-child(3) .timeline-dot { animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.9s, pulseGlow 2s infinite 1.6s; }
+        .timeline-item:nth-child(3) .tech-card::before { animation: growHeight 0.5s ease forwards 1.4s; height: 0; }
+        .timeline-item:nth-child(3) .year-label { animation-delay: 1.4s; }
+
+        .timeline-item:nth-child(4) .tech-card { animation: slideInTop 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 1.5s; }
+        .timeline-item:nth-child(4) .timeline-dot { animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 1.5s, pulseGlow 2s infinite 2.2s; }
+        .timeline-item:nth-child(4) .tech-card::before { animation: growHeight 0.5s ease forwards 2.0s; height: 0; }
+        .timeline-item:nth-child(4) .year-label { animation-delay: 2.0s; }
+
+        .timeline-item:nth-child(5) .tech-card { animation: slideInBottom 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 2.1s; }
+        .timeline-item:nth-child(5) .timeline-dot { animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 2.1s, pulseGlow 2s infinite 2.8s; }
+        .timeline-item:nth-child(5) .tech-card::before { animation: growHeight 0.5s ease forwards 2.6s; height: 0; }
+        .timeline-item:nth-child(5) .year-label { animation-delay: 2.6s; }
+
+        /* Specific Icon Animations */
+        .timeline-item:hover .card-icon {
+            animation: iconSpin 1s ease-in-out;
+        }
+        
+        .timeline-item:hover .tech-card {
+            animation: borderShine 2s infinite;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<div class="bg-tech"></div>
+<!-- Decorative Particles -->
+<div class="particle" style="width: 4px; height: 4px; top: 15%; left: 8%; animation: floatParticle 6s infinite;"></div>
+<div class="particle" style="width: 6px; height: 6px; top: 85%; left: 90%; animation: floatParticle 8s infinite reverse;"></div>
+<div class="particle" style="width: 3px; height: 3px; top: 35%; left: 92%; animation: floatParticle 10s infinite 2s;"></div>
+<div class="particle" style="width: 5px; height: 5px; top: 75%; left: 15%; animation: floatParticle 7s infinite 1s;"></div>
+<div class="particle" style="width: 3px; height: 3px; top: 10%; left: 50%; animation: floatParticle 9s infinite 3s;"></div>
+<div class="content-wrapper">
+<!-- Header -->
+<div class="header-section">
+<div>
+<p class="code-font text-cyan-400 text-sm font-bold tracking-widest uppercase mb-1">&lt;TimeLine /&gt;</p>
+<h1 class="text-5xl font-black text-white tracking-tight">INOVAÇÃO <span class="glow-text" style="color: #bd00ff;">CONSTANTE</span></h1>
+</div>
+<div class="text-right max-w-md">
+<p class="text-gray-300 text-lg font-light leading-snug">Uma jornada de evolução contínua, do cloud computing à inteligência artificial generativa.</p>
+</div>
+</div>
+<!-- Timeline Area -->
+<div class="timeline-container">
+<div class="timeline-line"></div>
+<!-- Item 1: 2010s (TOP) -->
+<div class="timeline-item">
+<div class="tech-card top" style="border-top: 3px solid #38bdf8; color: #38bdf8;">
+<div class="flex justify-between items-start">
+<i class="fas fa-cloud card-icon theme-2010"></i>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Mobile &amp; Cloud</h3>
+<p class="text-gray-300 text-xs leading-relaxed">A era do "Mobile-first" e escalabilidade em nuvem que democratizou o acesso a produtos digitais globais.</p>
+</div>
+<div class="timeline-dot theme-2010" style="color: #38bdf8;"></div>
+<div class="year-label theme-2010" style="bottom: -40px;">2010s</div>
+</div>
+<!-- Item 2: 2020s (BOTTOM) -->
+<div class="timeline-item" style="flex-direction: column-reverse;">
+<div class="tech-card bottom" style="border-bottom: 3px solid #a855f7; color: #a855f7;">
+<div class="flex justify-between items-start">
+<i class="fas fa-brain card-icon theme-2020"></i>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">IA &amp; MLOps</h3>
+<p class="text-gray-300 text-xs leading-relaxed">Ciclos de desenvolvimento acelerados por IA generativa e personalização extrema de experiências.</p>
+</div>
+<div class="timeline-dot theme-2020" style="color: #a855f7;"></div>
+<div class="year-label theme-2020" style="top: -40px;">2020s</div>
+</div>
+<!-- Item 3: Agora (TOP) -->
+<div class="timeline-item">
+<div class="tech-card top" style="border-top: 3px solid #f472b6; color: #f472b6;">
+<div class="flex justify-between items-start">
+<i class="fas fa-network-wired card-icon theme-now"></i>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Edge &amp; IoT</h3>
+<p class="text-gray-300 text-xs leading-relaxed">Processamento em tempo real na borda (Edge Computing) com foco total em privacidade por design.</p>
+</div>
+<div class="timeline-dot theme-now" style="color: #f472b6;"></div>
+<div class="year-label theme-now" style="bottom: -40px;">AGORA</div>
+</div>
+<!-- Item 4: Sempre (BOTTOM) -->
+<div class="timeline-item" style="flex-direction: column-reverse;">
+<div class="tech-card bottom" style="border-bottom: 3px solid #34d399; color: #34d399;">
+<div class="flex justify-between items-start">
+<i class="fas fa-sync-alt card-icon theme-always"></i>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">DevOps Culture</h3>
+<p class="text-gray-300 text-xs leading-relaxed">Integração contínua (CI/CD) e observabilidade garantindo qualidade e resiliência o tempo todo.</p>
+</div>
+<div class="timeline-dot theme-always" style="color: #34d399;"></div>
+<div class="year-label theme-always" style="top: -40px;">SEMPRE</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="flex justify-between items-center mt-6 border-t border-white/10 pt-4">
+<div class="flex gap-6 text-xs text-gray-500 code-font">
+<p><i class="fas fa-code-branch mr-2"></i>feature/innovation</p>
+<p><i class="fas fa-clock mr-2"></i>uptime: 99.9%</p>
+</div>
+<p class="text-gray-500 code-font text-sm">03 / 05</p>
+</div>
+</div>
+</div>
+</body>
+</html>

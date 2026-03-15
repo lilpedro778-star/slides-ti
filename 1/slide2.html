@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resolução de Problemas em TI</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;family=Roboto+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050510;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background-color: #0f172a;
+            color: white;
+            display: flex;
+        }
+        
+        /* Background & Effects */
+        .bg-tech {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://page.gensparksite.com/slides_images/09e4db47ca9af0c448db919c50263073.webp");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .glass-card {
+            background-color: rgba(30, 41, 59, 0.85); /* Solid color fallback for gradients/blur */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #00f3ff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            opacity: 0; /* For animation */
+            transform: translateX(50px);
+            animation: slideInRight 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        
+        .code-font {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .icon-box {
+            background-color: rgba(56, 189, 248, 0.15); /* Removed gradient */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Decorative Elements */
+        .circuit-line {
+            position: absolute;
+            background-color: rgba(0, 243, 255, 0.2);
+            z-index: 1;
+        }
+        .horizontal-line {
+            height: 1px;
+            width: 0; /* Start width 0 for animation */
+            animation: expandWidth 1.5s ease-out forwards 0.5s;
+        }
+        .vertical-line {
+            width: 1px;
+            height: 0; /* Start height 0 */
+            animation: expandHeight 1.5s ease-out forwards 0.5s;
+        }
+
+        /* Glow simulation without gradients */
+        .glowing-circle {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: rgba(139, 92, 246, 0.05);
+            box-shadow: 0 0 60px 30px rgba(139, 92, 246, 0.1);
+            top: 50%;
+            left: 20%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            animation: pulse-slow 4s infinite alternate;
+        }
+
+        /* Animations */
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes turnOn {
+            0% {
+                color: #334155;
+                text-shadow: none;
+                transform: scale(0.9);
+            }
+            70% {
+                color: #22d3ee;
+                text-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
+                transform: scale(1.1);
+            }
+            100% {
+                color: #06b6d4; /* Cyan-500 */
+                text-shadow: 0 0 20px rgba(34, 211, 238, 0.6);
+                transform: scale(1);
+            }
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(15deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes expandWidth {
+            to { width: 200px; }
+        }
+        @keyframes expandHeight {
+            to { height: 100px; }
+        }
+
+        @keyframes pulse-slow {
+            from { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            to { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+        }
+
+        .particle {
+            position: absolute;
+            color: rgba(0, 243, 255, 0.3);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 14px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .lightbulb-anim {
+            animation: turnOn 1.5s ease-out forwards 0.8s;
+            opacity: 0.3; /* Start dim */
+        }
+        
+        .delay-100 { animation-delay: 0.2s; }
+        .delay-200 { animation-delay: 0.4s; }
+        .delay-300 { animation-delay: 0.6s; }
+        .delay-400 { animation-delay: 0.8s; }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<div class="bg-tech"></div>
+<div class="glowing-circle"></div>
+<!-- Floating Code Particles -->
+<div class="particle" style="top: 80%; left: 10%; animation: floatParticle 6s infinite linear 0s;">{ }</div>
+<div class="particle" style="top: 70%; left: 25%; animation: floatParticle 8s infinite linear 2s;">&lt;/&gt;</div>
+<div class="particle" style="top: 60%; left: 15%; animation: floatParticle 7s infinite linear 4s;">01</div>
+<div class="particle" style="top: 85%; left: 35%; animation: floatParticle 9s infinite linear 1s;">func()</div>
+<!-- Decorative Circuit Lines -->
+<div class="circuit-line horizontal-line top-10 left-0"></div>
+<div class="circuit-line vertical-line bottom-0 right-20"></div>
+<!-- Main Content Layout -->
+<div class="relative z-10 flex w-full h-full p-16 gap-12 items-center">
+<!-- Left Column: Title & Main Visual -->
+<div class="w-5/12 flex flex-col justify-center h-full">
+<div class="mb-2">
+<p class="code-font text-purple-400 text-sm font-bold tracking-widest uppercase mb-2">&lt;Skillset /&gt;</p>
+<h1 class="text-6xl font-black leading-tight text-white mb-4">
+                    RESOLVER<br/>
+<!-- Replaced Gradient Text with Solid Color for Export Stability -->
+<span style="color: #22d3ee;">PROBLEMAS</span><br/>
+                    COMPLEXOS
+                </h1>
+</div>
+<div class="mb-8 border-l-2 border-purple-500 pl-4">
+<p class="text-gray-300 text-lg leading-relaxed">
+                    A TI não é apenas sobre computadores, é sobre encontrar soluções elegantes para desafios impossíveis. É transformar o caos em lógica.
+                </p>
+</div>
+<!-- Visual Graphic Representation -->
+<div class="relative w-full h-64 bg-slate-800 rounded-xl overflow-hidden border border-white/10 flex items-center justify-center group shadow-lg">
+<!-- Abstract "Brain/Circuit" representation using icons -->
+<i class="fas fa-microchip text-9xl text-slate-700 absolute opacity-50"></i>
+<!-- Animated Lightbulb -->
+<i class="fas fa-lightbulb text-6xl lightbulb-anim z-10 relative"></i>
+<!-- Status Code Text -->
+<div class="absolute bottom-4 right-4 code-font text-xs text-gray-500">
+<p>status: <span style="color: #10b981;">solved</span></p>
+<p>runtime: 0.02ms</p>
+</div>
+</div>
+</div>
+<!-- Right Column: List of Points -->
+<div class="w-7/12 flex flex-col justify-center gap-5">
+<!-- Item 1 -->
+<div class="glass-card p-5 rounded-r-xl flex items-start gap-5 delay-100">
+<div class="icon-box w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+<i class="fas fa-puzzle-piece text-2xl text-cyan-300"></i>
+</div>
+<div>
+<h3 class="text-xl font-bold text-white mb-1">Clareza no Caos</h3>
+<p class="text-gray-300 text-sm leading-relaxed">
+                        Transformo desafios ambíguos e requisitos confusos em arquiteturas de solução claras e passos executáveis.
+                    </p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="glass-card p-5 rounded-r-xl flex items-start gap-5 delay-200" style="border-left-color: #bd00ff;">
+<div class="icon-box w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+<i class="fas fa-brain text-2xl text-purple-300"></i>
+</div>
+<div>
+<h3 class="text-xl font-bold text-white mb-1">Lógica &amp; Criatividade</h3>
+<p class="text-gray-300 text-sm leading-relaxed">
+                        Combino pensamento analítico rigoroso com criatividade para encontrar caminhos que ninguém mais viu.
+                    </p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="glass-card p-5 rounded-r-xl flex items-start gap-5 delay-300" style="border-left-color: #ec4899;">
+<div class="icon-box w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+<i class="fas fa-robot text-2xl text-pink-300"></i>
+</div>
+<div>
+<h3 class="text-xl font-bold text-white mb-1">Automação Inteligente</h3>
+<p class="text-gray-300 text-sm leading-relaxed">
+                        Crio scripts, APIs e integrações que eliminam tarefas repetitivas, liberando tempo para o que realmente importa.
+                    </p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="glass-card p-5 rounded-r-xl flex items-start gap-5 delay-400" style="border-left-color: #10b981;">
+<div class="icon-box w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+<i class="fas fa-bug text-2xl text-emerald-300"></i>
+</div>
+<div>
+<h3 class="text-xl font-bold text-white mb-1">Resiliência (Debugging)</h3>
+<p class="text-gray-300 text-sm leading-relaxed">
+                        A satisfação única de investigar um erro, entender a causa raiz e ver o sistema rodar perfeitamente após o conserto.
+                    </p>
+</div>
+</div>
+</div>
+<!-- Page Number -->
+<div class="absolute bottom-6 right-8 text-gray-500 code-font text-sm">
+<p>02 / 05</p>
+</div>
+</div>
+</div>
+</body>
+</html>
